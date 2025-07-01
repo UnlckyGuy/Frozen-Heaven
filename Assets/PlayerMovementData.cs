@@ -23,5 +23,7 @@ public class PlayerMovementData : ScriptableObject
         runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
         runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
         #endregion
+
+        //gey shit
     }
 }
