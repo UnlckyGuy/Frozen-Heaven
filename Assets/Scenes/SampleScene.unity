@@ -816,7 +816,7 @@ MonoBehaviour:
   _groundCheckSize: {x: 0.28, y: 1.36}
   _frontWallCheckPoint: {fileID: 1589015918}
   _backWallCheckPoint: {fileID: 1589015918}
-  _wallCheckSize: {x: 1.07, y: 0.13}
+  _wallCheckSize: {x: 1, y: 0.1}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
