@@ -220,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 333980198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.0039, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -358,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.0039, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 938968306}
   - component: {fileID: 938968305}
   - component: {fileID: 938968307}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,8 +793,8 @@ Transform:
   m_GameObject: {fileID: 1589015913}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.6, z: 1}
+  m_LocalPosition: {x: -0.0039, y: 0, z: 0}
+  m_LocalScale: {x: 0.69216, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -813,10 +813,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 43d70759d03602142b0c9607a4cd73be, type: 2}
   _groundCheckPoint: {fileID: 1589015918}
-  _groundCheckSize: {x: 0.7, y: 1.2}
+  _groundCheckSize: {x: 0.28, y: 1.36}
   _frontWallCheckPoint: {fileID: 1589015918}
   _backWallCheckPoint: {fileID: 1589015918}
-  _wallCheckSize: {x: 0.89, y: 1}
+  _wallCheckSize: {x: 1.07, y: 0.13}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 1657979861}
   - component: {fileID: 1657979860}
   - component: {fileID: 1657979862}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
