@@ -7,6 +7,8 @@
  */
 
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -48,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _moveInput;
     public float LastPressedJumpTime { get; private set; }
 
+    //Camera
+
+    private CameraFollowObjectScript _cameraFollowObject;
+    private float _fallSpeedYDampingSpeedThreshold;
+
     //Set all of these up in the inspector
     [Header("Checks")]
     [SerializeField] private Transform _groundCheckPoint;
@@ -60,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Layers & Tags")]
     [SerializeField] private LayerMask _groundLayer;
+
+    [Header("Camera stuff")]
+    [SerializeField] private GameObject CameraFollowGO;
     #endregion
 
     private void Awake()
@@ -71,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
     {
         SetGravityScale(Data.gravityScale);
         IsFacingRight = true;
+
+        _cameraFollowObject = CameraFollowGO.GetComponent<CameraFollowObjectScript>();
+
+        _fallSpeedYDampingSpeedThreshold = CameraManager.instance._fallSpeedYDampingChangeTreshold;
     }
 
     private void Update()
@@ -214,6 +228,23 @@ public class PlayerMovement : MonoBehaviour
             SetGravityScale(Data.gravityScale);
         }
         #endregion
+
+        #region CAMERA
+        // if we are falling past a certain speed threshold
+        if (RB.linearVelocity.y < _fallSpeedYDampingSpeedThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPLayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        //if we are standing still or moving up
+        if (RB.linearVelocity.y >= 0f && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPLayerFalling)
+        {
+            //reset so it can be called again
+            CameraManager.instance.LerpedFromPLayerFalling = false;
+
+            CameraManager.instance.LerpYDamping(true);
+        }
+        #endregion
     }
 
     private void FixedUpdate()
@@ -307,12 +338,28 @@ public class PlayerMovement : MonoBehaviour
 
     private void Turn()
     {
-        //stores scale and flips the player along the x axis, 
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
-        transform.localScale = scale;
+        //stores roation and flips the player along the x axis, 
+        if (IsFacingRight)
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
 
-        IsFacingRight = !IsFacingRight;
+            IsFacingRight = !IsFacingRight;
+
+            //Make the camera turn around
+            _cameraFollowObject.CallTurn();
+        }
+        else
+        {
+            Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+
+            IsFacingRight = !IsFacingRight;
+
+            //Make the camera turn around
+            _cameraFollowObject.CallTurn();
+        }
+
     }
     #endregion
 
